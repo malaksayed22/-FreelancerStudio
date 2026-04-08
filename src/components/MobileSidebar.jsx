@@ -493,7 +493,6 @@ export default function MobileSidebar({
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap');
 
-        @keyframes ms-spin    { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
         @keyframes ms-float   { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
         @keyframes ms-shimmer { 0%{transform:translateX(-100%)} 60%{transform:translateX(100%)} 100%{transform:translateX(100%)} }
         @keyframes ms-rdot    { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.7)} }
@@ -548,11 +547,6 @@ export default function MobileSidebar({
           transition: opacity .3s, transform .3s;
         }
 
-        .ms-av-ring {
-          position: absolute; inset: -3px; border-radius: 50%;
-          background: conic-gradient(from 0deg,#c8ff57,#57d8ff,#ff57c8,#c8ff57);
-          animation: ms-spin 4s linear infinite;
-        }
         .ms-role-dot { animation: ms-rdot 1.6s ease-in-out infinite; }
         .ms-role-ring {
           position: absolute; inset: -3px; border-radius: 50%;
@@ -674,7 +668,6 @@ export default function MobileSidebar({
                 flexShrink: 0,
               }}
             >
-              <div className="ms-av-ring" />
               <div
                 style={{
                   position: "absolute",

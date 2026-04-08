@@ -1077,8 +1077,6 @@ export default function MobileApp() {
         @keyframes ma-dr { 0%{transform:scale(.5);opacity:.9} 100%{transform:scale(2.2);opacity:0} }
         .ma-live-ring { position:absolute; inset:-3px; border-radius:50%; border:1px solid rgba(200,255,87,.5); animation:ma-dr 1.6s ease-in-out infinite; }
 
-        @keyframes ma-spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-        .ma-avatar-ring { position:absolute; inset:-3px; border-radius:50%; background:conic-gradient(from 0deg,#c8ff57,#57d8ff,#ff57c8,#c8ff57); animation:ma-spin 4s linear infinite; }
 
         @keyframes ma-slide { from{opacity:0;transform:translateX(16px)} to{opacity:1;transform:translateX(0)} }
         .ma-section { animation: ma-slide .25s cubic-bezier(.16,1,.3,1) both; }
@@ -1337,7 +1335,6 @@ export default function MobileApp() {
             </div>
             {/* Avatar */}
             <div style={{ position: "relative", width: 34, height: 34 }}>
-              <div className="ma-avatar-ring" />
               <div
                 style={{
                   position: "absolute",
