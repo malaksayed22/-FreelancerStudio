@@ -1094,56 +1094,55 @@ export default function SettingsPage() {
         .st-input:focus { border-color: rgba(200,255,87,0.4); }
         .st-input option { background: #161619; }
         .st-nav-item {
-          display: flex; align-items: center; gap: 8px;
-          padding: 8px 10px; border-radius: 8px; border: none;
-          background: transparent; width: 100%; text-align: left;
+          display: flex; align-items: center; gap: 6px;
+          padding: 8px 14px; border-radius: 0; border: none;
+          background: transparent; text-align: left; white-space: nowrap;
           font-family: 'DM Mono', monospace; font-size: 11px;
-          color: #555; margin-bottom: 2px; transition: all .15s;
+          color: #555; transition: all .15s; position: relative;
+          border-bottom: 2px solid transparent; flex-shrink: 0;
         }
-        .st-nav-item:hover { background: rgba(255,255,255,0.04); color: #e0e0e0; }
-        .st-nav-item.active { background: rgba(200,255,87,0.08); color: #C8FF57; }
-        .st-nav-item.danger { color: #FF3DE8; }
-        .st-nav-item.danger:hover { background: rgba(255,61,232,0.06); color: #FF3DE8; }
-        .st-nav-item.danger.active { background: rgba(255,61,232,0.1); color: #FF3DE8; }
-        .st-nav-dash {
-          width: 3px; height: 14px; border-radius: 99px; flex-shrink: 0;
-          background: rgba(255,255,255,0.08); transition: background .15s, box-shadow .15s;
-        }
-        .st-nav-item:hover .st-nav-dash { background: rgba(200,255,87,0.3); }
-        .st-nav-item.active .st-nav-dash { background: #C8FF57; box-shadow: 0 0 6px rgba(200,255,87,0.5); }
-        .st-nav-item.danger .st-nav-dash { background: rgba(255,61,232,0.2); }
-        .st-nav-item.danger:hover .st-nav-dash { background: rgba(255,61,232,0.4); }
-        .st-nav-item.danger.active .st-nav-dash { background: #FF3DE8; box-shadow: 0 0 6px rgba(255,61,232,0.5); }
+        .st-nav-item:hover { color: #e0e0e0; background: rgba(255,255,255,0.03); }
+        .st-nav-item.active { color: #C8FF57; border-bottom-color: #C8FF57; }
+        .st-nav-item.danger { color: #555; }
+        .st-nav-item.danger:hover { color: #FF3DE8; background: rgba(255,61,232,0.04); }
+        .st-nav-item.danger.active { color: #FF3DE8; border-bottom-color: #FF3DE8; }
+        .st-nav-dash { display: none; }
       `}</style>
 
       <div
         style={{
           display: "flex",
+          flexDirection: "column",
           minHeight: "calc(100vh - 64px)",
           background: "#0a0a0c",
         }}
       >
-        {/* ── LEFT NAV ── */}
+        {/* ── TOP NAV BAR ── */}
         <div
           style={{
-            width: 200,
-            flexShrink: 0,
             background: "#161619",
-            borderRight: "1px solid rgba(255,255,255,0.07)",
-            padding: "16px 10px",
+            borderBottom: "1px solid rgba(255,255,255,0.07)",
             display: "flex",
-            flexDirection: "column",
+            alignItems: "stretch",
+            padding: "0 16px",
+            overflowX: "auto",
+            scrollbarWidth: "none",
           }}
         >
+          {/* Label */}
           <div
             style={{
               fontFamily: "'DM Mono',monospace",
               fontSize: 9,
-              color: "#444",
+              color: "#333",
               textTransform: "uppercase",
               letterSpacing: ".12em",
-              padding: "0 10px",
-              marginBottom: 8,
+              display: "flex",
+              alignItems: "center",
+              paddingRight: 12,
+              borderRight: "1px solid rgba(255,255,255,0.07)",
+              marginRight: 4,
+              flexShrink: 0,
             }}
           >
             Settings
@@ -1161,19 +1160,15 @@ export default function SettingsPage() {
             </button>
           ))}
 
+          {/* Divider */}
           <div
             style={{
-              fontFamily: "'DM Mono',monospace",
-              fontSize: 9,
-              color: "#444",
-              textTransform: "uppercase",
-              letterSpacing: ".12em",
-              padding: "0 10px",
-              margin: "14px 0 8px",
+              width: 1,
+              background: "rgba(255,255,255,0.07)",
+              margin: "10px 6px",
+              flexShrink: 0,
             }}
-          >
-            Danger
-          </div>
+          />
 
           {SECTIONS.filter((s) => s.isDanger).map((s) => (
             <button
@@ -1188,6 +1183,37 @@ export default function SettingsPage() {
               {s.label}
             </button>
           ))}
+
+          {/* LIVE indicator pushed to right */}
+          <div
+            style={{
+              marginLeft: "auto",
+              display: "flex",
+              alignItems: "center",
+              gap: 5,
+              paddingLeft: 12,
+              flexShrink: 0,
+            }}
+          >
+            <div
+              style={{
+                width: 6,
+                height: 6,
+                borderRadius: "50%",
+                background: "#C8FF57",
+                animation: "st-pulse 1.5s infinite",
+              }}
+            />
+            <span
+              style={{
+                fontFamily: "'DM Mono',monospace",
+                fontSize: 9,
+                color: "#444",
+              }}
+            >
+              LIVE
+            </span>
+          </div>
         </div>
 
         {/* ── MAIN CONTENT ── */}
@@ -1199,59 +1225,6 @@ export default function SettingsPage() {
             overflow: "hidden",
           }}
         >
-          {/* Top bar */}
-          <div
-            style={{
-              height: 52,
-              borderBottom: "1px solid rgba(255,255,255,0.07)",
-              display: "flex",
-              alignItems: "center",
-              padding: "0 24px",
-              gap: 8,
-              background: "#161619",
-            }}
-          >
-            <span
-              style={{
-                fontFamily: "'DM Mono',monospace",
-                fontSize: 11,
-                color: "#444",
-              }}
-            >
-              SETTINGS <span style={{ color: "#444" }}>/ </span>
-              <span style={{ color: "#C8FF57" }}>
-                {activeSec?.title?.toUpperCase() || "PROFILE"}
-              </span>
-            </span>
-            <div
-              style={{
-                marginLeft: "auto",
-                display: "flex",
-                alignItems: "center",
-                gap: 6,
-              }}
-            >
-              <div
-                style={{
-                  width: 6,
-                  height: 6,
-                  borderRadius: "50%",
-                  background: "#C8FF57",
-                  animation: "st-pulse 1.5s infinite",
-                }}
-              />
-              <span
-                style={{
-                  fontFamily: "'DM Mono',monospace",
-                  fontSize: 10,
-                  color: "#444",
-                }}
-              >
-                LIVE
-              </span>
-            </div>
-          </div>
-
           {/* Scrollable content */}
           <div style={{ flex: 1, overflowY: "auto", padding: 24 }}>
             {/* Page header */}
