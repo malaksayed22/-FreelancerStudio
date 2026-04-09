@@ -1684,7 +1684,17 @@ function HomeTab({ onToast }) {
             See All
           </button>
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 8,
+            maxHeight: 120,
+            overflowY: "auto",
+            scrollbarWidth: "none",
+            WebkitOverflowScrolling: "touch",
+          }}
+        >
           {ACTIVITY.map((a, i) => (
             <div
               key={i}
@@ -1926,15 +1936,24 @@ function TasksTab({ onToast }) {
                 {col.items.length}
               </span>
             </div>
-            {/* Cards */}
-            {col.items.map((c, i) => (
-              <KCard
-                key={i}
-                card={c}
-                done={col.key === "done"}
-                onToast={onToast}
-              />
-            ))}
+            {/* Cards — scrollable, first card visible */}
+            <div
+              style={{
+                maxHeight: 102,
+                overflowY: "auto",
+                scrollbarWidth: "none",
+                WebkitOverflowScrolling: "touch",
+              }}
+            >
+              {col.items.map((c, i) => (
+                <KCard
+                  key={i}
+                  card={c}
+                  done={col.key === "done"}
+                  onToast={onToast}
+                />
+              ))}
+            </div>
           </div>
         ))}
       </div>
@@ -1973,7 +1992,17 @@ function ClientsTab({ onToast }) {
           + New
         </button>
       </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 8,
+          maxHeight: 146,
+          overflowY: "auto",
+          scrollbarWidth: "none",
+          WebkitOverflowScrolling: "touch",
+        }}
+      >
         {CLIENTS.map((c, i) => (
           <div
             key={i}
