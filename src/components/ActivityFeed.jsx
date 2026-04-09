@@ -26,10 +26,10 @@ export default function ActivityFeed() {
     height: 0,
   });
   const items = activityHistory;
-  const visibleRows = 3;
+  const visibleRows = isDesktop ? 3 : 2;
   const activityRowHeight = 45;
   const maxListHeight = visibleRows * activityRowHeight;
-  const hasOverflow = isDesktop && items.length > visibleRows;
+  const hasOverflow = items.length > visibleRows;
 
   const updateScrollMeta = () => {
     const el = scrollRef.current;

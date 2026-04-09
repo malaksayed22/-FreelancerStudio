@@ -30,10 +30,10 @@ export default function ClientList() {
     top: 0,
     height: 0,
   });
-  const visibleRows = 3;
+  const visibleRows = isDesktop ? 3 : 2;
   const clientRowHeight = 64;
   const maxListHeight = visibleRows * clientRowHeight;
-  const hasOverflow = isDesktop && clients.length > visibleRows;
+  const hasOverflow = clients.length > visibleRows;
 
   const updateScrollMeta = () => {
     const el = scrollRef.current;

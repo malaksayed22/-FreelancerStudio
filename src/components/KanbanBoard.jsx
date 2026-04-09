@@ -934,10 +934,11 @@ export default function KanbanBoard() {
 
               <Droppable droppableId={col.key}>
                 {(provided, snapshot) => {
-                  const clipH =
-                    isDesktop && colMaxHeights[col.key]
-                      ? `${colMaxHeights[col.key]}px`
-                      : undefined;
+                  const clipH = colMaxHeights[col.key]
+                    ? `${colMaxHeights[col.key]}px`
+                    : !isDesktop && tasks[col.key].length > 1
+                    ? "115px"
+                    : undefined;
                   return (
                     <div
                       className={clipH ? "kanban-scroll-wrap" : undefined}
