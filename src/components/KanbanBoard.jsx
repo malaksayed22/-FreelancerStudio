@@ -779,22 +779,23 @@ export default function KanbanBoard() {
   useEffect(() => {
     const raf = requestAnimationFrame(() => {
       const heights = {};
+      const visibleCards = isDesktop ? 3 : 1;
       COLUMNS.forEach(({ key }) => {
-        if ((tasks[key]?.length ?? 0) <= 3) return;
+        if ((tasks[key]?.length ?? 0) <= visibleCards) return;
         const native = scrollRefs.current[key];
         if (!native) return;
         const droppable = native.firstElementChild;
-        if (!droppable || droppable.children.length < 4) return;
+        if (!droppable || droppable.children.length < visibleCards + 1) return;
         const containerTop = native.getBoundingClientRect().top;
-        // Bottom of 3rd card = exact clip point
-        const thirdBottom =
-          droppable.children[2].getBoundingClientRect().bottom;
-        heights[key] = Math.round(thirdBottom - containerTop);
+        // Bottom of last visible card = exact clip point
+        const lastVisible =
+          droppable.children[visibleCards - 1].getBoundingClientRect().bottom;
+        heights[key] = Math.round(lastVisible - containerTop);
       });
       setColMaxHeights((prev) => ({ ...prev, ...heights }));
     });
     return () => cancelAnimationFrame(raf);
-  }, [tasks]);
+  }, [tasks, isDesktop]);
 
   const [addModal, setAddModal] = useState({ open: false, column: "todo" });
   const [progressModal, setProgressModal] = useState(null);
@@ -937,7 +938,7 @@ export default function KanbanBoard() {
                   const clipH = colMaxHeights[col.key]
                     ? `${colMaxHeights[col.key]}px`
                     : !isDesktop && tasks[col.key].length > 1
-                    ? "115px"
+                    ? "110px"
                     : undefined;
                   return (
                     <div
